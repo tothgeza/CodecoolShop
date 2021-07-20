@@ -1,9 +1,10 @@
 package com.codecool.shop.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategory extends BaseModel {
+public class ProductCategory extends BaseModel implements Serializable {
     private String department;
     private List<Product> products;
 
