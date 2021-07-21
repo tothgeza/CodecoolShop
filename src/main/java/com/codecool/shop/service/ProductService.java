@@ -48,6 +48,10 @@ public class ProductService {
         return productDao.find(productId);
     }
 
+    public User getUserByEmailPass(String email,String pass){
+        return userDao.getUserByEmailPass(email,pass);
+    }
+
     public void addProductToCart(String userId, int productId){
         Product product = getProductById(productId);
         ShoppingCart shoppingCart;

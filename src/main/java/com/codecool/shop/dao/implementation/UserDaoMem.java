@@ -30,4 +30,10 @@ public class UserDaoMem implements UserDao {
     public User getUser(String userId) {
         return users.stream().filter(t -> t.getId().equals(userId)).findFirst().orElse(null);
     }
+
+    @Override
+    public User getUserByEmailPass(String email, String pass) {
+        return users.stream().filter(t -> t.getEmail().equals(email) && t.getPassword().equals(pass)).findFirst().orElse(null);
+    }
+
 }

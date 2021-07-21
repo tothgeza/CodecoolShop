@@ -23,6 +23,15 @@ public class User {
         this.shippingAddress = shippingAddress;
     }
 
+    public User(String userId, String firstName, String lastName, String email, String phone, String password) {
+        this.id = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
+
     public void setCreditCard(CreditCard creditCard) {
         this.creditCard = creditCard;
     }
@@ -55,7 +64,16 @@ public class User {
         return shippingAddress;
     }
 
-    public String getName(){
+    public String getName() {
         return firstName + " " + lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " " + email + " " + password;
     }
 }
