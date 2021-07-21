@@ -12,6 +12,7 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.AdminLog;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.User;
 import com.codecool.shop.service.ProductService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -24,6 +25,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -34,8 +36,12 @@ public class AddToCart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String jsonString = new String();
-        String userID = req.getSession().getId();
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
+        ProductService productService = new ProductService(productDataStore, productCategoryDataStore, shoppingCartDao);
+
+        String jsonString = "";
         try {
             String line = "";
             BufferedReader reader = req.getReader();
@@ -45,17 +51,22 @@ public class AddToCart extends HttpServlet {
             e.printStackTrace();
         }
         int productId = Integer.parseInt(jsonString);
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore,shoppingCartDao);
         Product product = productService.getProductById(productId);
-        try {
-            AdminLog.saveToJSON(userID,product, "Product add to cart");
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        HttpSession session = req.getSession();
+        if (session.getAttribute("userId") != null) {
+            String userId = (String) session.getAttribute("userId");
+            User user = productService.getUserById(userId);
+            user.addProduct(product);
+        } else {
+            String userID = req.getSession().getId();
+            try {
+                AdminLog.saveToJSON(userID, product, "Product add to cart");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            productService.addProductToCart(userID, productId);
         }
-        productService.addProductToCart(userID, productId);
     }
 
 }
