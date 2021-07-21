@@ -10,6 +10,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.ShoppingCart;
+import com.codecool.shop.model.User;
 import com.codecool.shop.service.ProductService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -22,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -35,11 +37,17 @@ public class CartApi extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userID = request.getSession().getId();
-        ShoppingCart cart = service.getShoppingCartByUserId(userID);
-
+        HttpSession session = request.getSession();
+        ShoppingCart cart;
+        if (session.getAttribute("userId") != null) {
+            String userId = (String) session.getAttribute("userId");
+            User user = service.getUserById(userId);
+            cart = user.getShoppingCart();
+        } else {
+            String userID = request.getSession().getId();
+            cart = service.getShoppingCartByUserId(userID);
+        }
         String myCart = new Gson().toJson(cart);
-
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
