@@ -44,18 +44,28 @@ public class PaymentController extends HttpServlet {
         ProductService productService = new ProductService(productDataStore,productCategoryDataStore, shoppingCartDao);
 
         HttpSession session = req.getSession();
-        String userId = session.getId();
-
-        User user = productService.getUserById(userId);
-        user.setCreditCard(creditCard);
-        CreditCard card = user.getCreditCard();
-
-        ShoppingCart shoppingCart = productService.getShoppingCartByUserId(userId);
-        Order order = new Order(user, shoppingCart);
-        productService.addOrder(order);
+        String userId;
+        User user;
+        Order order;
+        ShoppingCart shoppingCart;
+        if(session.getAttribute("userId") != null){
+            userId = (String) session.getAttribute("userId");
+            user = productService.getUserById("userId");
+            user.setCreditCard(creditCard);
+            shoppingCart = productService.getShoppingCartByUserId(userId);
+            order = new Order(user, shoppingCart);
+            user.addOrder(order);
+        } else {
+            userId = session.getId();
+            user = productService.getUserById(userId);
+            user.setCreditCard(creditCard);
+            shoppingCart = productService.getShoppingCartByUserId(userId);
+            order = new Order(user, shoppingCart);
+            productService.addOrder(order);
+        }
 
         try {
-            AdminLog.saveToJSON(userId, card, "Check address");
+            AdminLog.saveToJSON(userId, creditCard, "Check address");
         } catch (Exception e) {
             e.printStackTrace();
         }

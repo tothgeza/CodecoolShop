@@ -1,5 +1,8 @@
 package com.codecool.shop.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String id;
     private String firstName;
@@ -13,6 +16,7 @@ public class User {
     private CreditCard creditCard;
     private Paypal paypal;
     private ShoppingCart shoppingcart;
+    private List<Order> orders;
 
     public User(String userId, String firstName, String lastName, String email, String phone, BillingAddress billingAddress, ShippingAddress shippingAddress) {
         this.id = userId;
@@ -84,9 +88,45 @@ public class User {
     public ShoppingCart getShoppingCart() {
         return shoppingcart;
     }
-    public void addShoppingCart(ShoppingCart shoppingcart){
+
+    public void addShoppingCart(ShoppingCart shoppingcart) {
         this.shoppingcart = shoppingcart;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setBillingAddress(BillingAddress billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public void setShippingAddress(ShippingAddress shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void addOrder(Order order) {
+        if(orders != null){
+            orders.add(order);
+        } else {
+            orders = new ArrayList<>();
+            orders.add(order);
+        }
+    }
+
+
     @Override
     public String toString() {
         return firstName + " " + lastName + " " + email + " " + password;

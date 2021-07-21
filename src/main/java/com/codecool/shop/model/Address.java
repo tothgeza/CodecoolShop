@@ -15,4 +15,23 @@ public abstract class Address {
          this.houseNumber = houseNumber;
      }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public int getZipcode() {
+        return zipcode;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public int getHouseNumber() {
+        return houseNumber;
+    }
 }

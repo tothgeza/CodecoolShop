@@ -39,7 +39,8 @@
                 <form class="row g-3" id="order-details" method="post" action="/checkout">
                     <h5 class="card-title py-2 text-center">Contact Details</h5>
                     <div class="col-12">
-                        <input type="text" class="form-control" name="firstName" placeholder="First name" aria-label="First name">
+                        <input type="text" class="form-control" name="firstName" placeholder="First name"
+                               aria-label="First name" th:value="${user} ? ${user.getFirstName()} : ''">
                     </div>
                     <div class="col-12">
                         <input type="text" class="form-control" name="lastName" placeholder="Last name" aria-label="Last name">
@@ -68,19 +69,24 @@
                     </div>
                     <h5 class="card-title py-2 text-center">Shipping Address</h5>
                     <div class="col-md-12">
-                        <input type="text" class="form-control" name="shipCountry" id="inputShippingCountry" placeholder="Country" aria-label="Country">
+                        <input type="text" class="form-control" name="shipCountry" id="inputShippingCountry" placeholder="Country"
+                               aria-label="Country" th:value="${user && user.getShippingAddress()} ? ${user.getShippingAddress().getCountry()} : ''">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="shipCity" id="inputShippingCity" placeholder="City" aria-label="City">
+                        <input type="text" class="form-control" name="shipCity" id="inputShippingCity" placeholder="City"
+                               aria-label="City" th:value="${user && user.getShippingAddress()} ? ${user.getShippingAddress().getCity()}:''">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="shipZip" id="inputShippingZip" placeholder="Zip code" aria-label="Zip code">
+                        <input type="text" class="form-control" name="shipZip" id="inputShippingZip" placeholder="Zip code"
+                               aria-label="Zip code" th:value="${user && user.getShippingAddress()} ? ${user.getShippingAddress().getZipcode()} : ''">
                     </div>
                     <div class="col-8">
-                        <input type="text" class="form-control" name="shipStreet" id="inputShippingAddress" placeholder="Address" aria-label="Address">
+                        <input type="text" class="form-control" name="shipStreet" id="inputShippingAddress" placeholder="Address"
+                               aria-label="Address" th:value="${user && user.getShippingAddress()} ? ${user.getShippingAddress().getStreet()}:''">
                     </div>
                     <div class="col-4">
-                        <input type="number" class="form-control" name="shipHouse" id="inputShippingHouseNumber" placeholder="House number" aria-label="House number">
+                        <input type="number" class="form-control" name="shipHouse" id="inputShippingHouseNumber" placeholder="House number"
+                               aria-label="House number" th:value="${user && user.getShippingAddress()} ? ${user.getShippingAddress().getHouseNumber()}:''">
                     </div>
                     <div class="col-12 text-center pt-5">
                             <!--SHIPPINGMETHOD-->

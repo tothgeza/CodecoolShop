@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.config.Util;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
@@ -42,7 +43,7 @@ public class RegistrationController extends HttpServlet {
         ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
         ProductService productService = new ProductService(productDataStore,productCategoryDataStore, shoppingCartDao);
 
-        User newUser = new User(userId, firstName, lastName, email, phone, password);
+        User newUser = new User(userId, Util.enCodeHU(firstName), Util.enCodeHU(lastName), Util.enCodeHU(email), Util.enCodeHU(phone), Util.enCodeHU(password));
         ShoppingCart cart = productService.getShoppingCartByUserId(userId);
         if (cart!=null){
             newUser.addShoppingCart(cart);
