@@ -47,7 +47,7 @@ public class ProductController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         HttpSession session = req.getSession();
-        session.
+
         if(session.getAttribute("userId") != null){
             String userId = (String) session.getAttribute("userId");
             User currentUser = productService.getUserById(userId);
