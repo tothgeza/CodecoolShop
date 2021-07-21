@@ -7,6 +7,7 @@ import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
+import com.codecool.shop.model.ShoppingCart;
 import com.codecool.shop.model.User;
 import com.codecool.shop.service.ProductService;
 import org.thymeleaf.TemplateEngine;
@@ -35,14 +36,20 @@ public class RegistrationController extends HttpServlet {
         String password = req.getParameter("password");
         HttpSession session = req.getSession();
         String userId = session.getId();
-        User newUser = new User(userId, firstName, lastName, email, phone, password);
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
         ProductService productService = new ProductService(productDataStore,productCategoryDataStore, shoppingCartDao);
+
+        User newUser = new User(userId, firstName, lastName, email, phone, password);
+        ShoppingCart cart = productService.getShoppingCartByUserId(userId);
+        if (cart!=null){
+            newUser.addShoppingCart(cart);
+        }
         productService.addUser(newUser);
-        System.out.println(productService.getUserById(userId).toString());
+
+        //System.out.println(productService.getUserById(userId).toString());
 //            System.out.println(newUser.toString());
 
         resp.sendRedirect("/login");

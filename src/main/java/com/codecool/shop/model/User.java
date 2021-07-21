@@ -84,7 +84,9 @@ public class User {
     public ShoppingCart getShoppingCart() {
         return shoppingcart;
     }
-
+    public void addShoppingCart(ShoppingCart shoppingcart){
+        this.shoppingcart = shoppingcart;
+    }
     @Override
     public String toString() {
         return firstName + " " + lastName + " " + email + " " + password;
