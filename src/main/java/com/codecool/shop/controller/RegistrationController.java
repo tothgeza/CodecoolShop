@@ -36,19 +36,22 @@ public class RegistrationController extends HttpServlet {
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
         HttpSession session = req.getSession();
-        String userId = session.getId();
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
         ProductService productService = new ProductService(productDataStore,productCategoryDataStore, shoppingCartDao);
+        // create new id
+//        session.invalidate();
+//        HttpSession session2 = req.getSession();
+        String userId = session.getId();
 
         User newUser = new User(userId, Util.enCodeHU(firstName), Util.enCodeHU(lastName), Util.enCodeHU(email), Util.enCodeHU(phone), Util.enCodeHU(password));
         ShoppingCart cart = productService.getShoppingCartByUserId(userId);
         if (cart!=null){
             newUser.addShoppingCart(cart);
         }
-        productService.addUser(newUser);
+        productService.addRegisteredUser(newUser);
 
         //System.out.println(productService.getUserById(userId).toString());
 //            System.out.println(newUser.toString());

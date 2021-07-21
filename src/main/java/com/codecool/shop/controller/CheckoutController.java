@@ -65,10 +65,10 @@ public class CheckoutController extends HttpServlet {
         String userId;
         if (session.getAttribute("userId") != null){
             userId = (String) session.getAttribute("userId");
-            User user = productService.getUserById(userId);
+            User user = productService.getRegisteredUserById(userId);
             user.setShippingAddress(newShipping);
             user.setBillingAddress(newBilling);
-        } else {
+        } else{
             userId = session.getId();
             User newUser = new User(userId, firstName, lastName, email, phone, newBilling, newShipping);
             productService.addUser(newUser);

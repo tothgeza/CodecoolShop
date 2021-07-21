@@ -41,7 +41,7 @@ public class CartApi extends HttpServlet {
         ShoppingCart cart;
         if (session.getAttribute("userId") != null) {
             String userId = (String) session.getAttribute("userId");
-            User user = service.getUserById(userId);
+            User user = service.getRegisteredUserById(userId);
             cart = user.getShoppingCart();
         } else {
             String userID = request.getSession().getId();

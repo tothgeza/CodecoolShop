@@ -56,7 +56,7 @@ public class AddToCart extends HttpServlet {
         HttpSession session = req.getSession();
         if (session.getAttribute("userId") != null) {
             String userId = (String) session.getAttribute("userId");
-            User user = productService.getUserById(userId);
+            User user = productService.getRegisteredUserById(userId);
             user.addProduct(product);
         } else {
             String userID = req.getSession().getId();

@@ -50,10 +50,22 @@ public class SuccessController  extends HttpServlet {
         ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
         ProductService productService = new ProductService(productDataStore,productCategoryDataStore, shoppingCartDao);
 
-        HttpSession userSession = request.getSession();
-        String userId = userSession.getId();
+        HttpSession session = request.getSession();
 
-        User user = productService.getUserById(userId);
+        Order order;
+        String userId;
+        User user;
+        if (session.getAttribute("userId") != null){
+            userId = (String) session.getAttribute("userId");
+            user = productService.getRegisteredUserById(userId);
+            order = user.getOrders().get(user.getOrders().size()-1);
+        } else {
+            userId = session.getId();
+            List<Order> orders = productService.getOrderByUserId(userId);
+            order = orders.get(0);
+            user = productService.getUserById(userId);
+        }
+
 
         String userEmail = user.getEmail();
        // String[] to = { userEmail }; // list of recipient email addresses
@@ -85,9 +97,6 @@ public class SuccessController  extends HttpServlet {
 //                "beatrix.szabo.sc@gmail.com",
 //                "siposm17@gmail.com" };
         String subject = "Success Order!";
-
-        List<Order> orders = productService.getOrderByUserId(userId);
-        Order order = orders.get(0);
         ShoppingCart shoppingCart = order.getShoppingCart();
 
 
@@ -100,8 +109,8 @@ public class SuccessController  extends HttpServlet {
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.auth", "true");
 
-        Session session = Session.getInstance(props);
-        MimeMessage msg = new MimeMessage(session);
+        Session session2 = Session.getInstance(props);
+        MimeMessage msg = new MimeMessage(session2);
 
         try {
             msg.setFrom(new InternetAddress(from));
@@ -125,7 +134,7 @@ public class SuccessController  extends HttpServlet {
 
             msg.setContent(email, "text/html");
             msg.setSubject(subject); // HERE WE CAN SEE THE MSG
-            Transport transport = session.getTransport("smtp");
+            Transport transport = session2.getTransport("smtp");
             transport.connect(host, from, pass);
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();

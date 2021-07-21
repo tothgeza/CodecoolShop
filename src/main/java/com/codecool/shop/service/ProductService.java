@@ -14,7 +14,7 @@ public class ProductService {
     private UserDao userDao = UserDaoMem.getInstance();
     private OrderDao orderDao = OrderDaoMem.getInstance();
 
-    public ProductService(){
+    public ProductService() {
     }
 
     public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao, ShoppingCartDao shoppingCartDao) {
@@ -32,7 +32,8 @@ public class ProductService {
         var category = productCategoryDao.find(categoryId);
         return productDao.getBy(category);
     }
-    public ShoppingCart getShoppingCartByUserId(String userID){
+
+    public ShoppingCart getShoppingCartByUserId(String userID) {
         return shoppingCartDao.find(userID);
     }
 
@@ -44,18 +45,18 @@ public class ProductService {
         return productDao.getBy(supplier);
     }
 
-    public Product getProductById(int productId){
+    public Product getProductById(int productId) {
         return productDao.find(productId);
     }
 
-    public User getUserByEmailPass(String email,String pass){
-        return userDao.getUserByEmailPass(email,pass);
+    public User getUserByEmailPass(String email, String pass) {
+        return userDao.getUserByEmailPass(email, pass);
     }
 
-    public void addProductToCart(String userId, int productId){
+    public void addProductToCart(String userId, int productId) {
         Product product = getProductById(productId);
         ShoppingCart shoppingCart;
-        if (shoppingCartDao.getAll().containsKey(userId)){
+        if (shoppingCartDao.getAll().containsKey(userId)) {
             shoppingCart = shoppingCartDao.find(userId);
             shoppingCart.addProduct(product);
         } else {
@@ -68,24 +69,34 @@ public class ProductService {
         userDao.addUser(user);
     }
 
+    public void addRegisteredUser(User user) {
+        userDao.addRegisteredUser(user);
+    }
+
     public User getUserById(String userId) {
         return userDao.getUser(userId);
     }
+    public User getRegisteredUserById(String userId) {
+        return userDao.getRegisteredUser(userId);
+    }
 
-    public void addOrder(Order order){
+
+    public void addOrder(Order order) {
         orderDao.addOrder(order);
     }
-    public List<Order> getOrderByUserId(String userId){
+
+    public List<Order> getOrderByUserId(String userId) {
         return orderDao.getOrderByUserId(userId);
     }
 
-    public void removeProductFromCart(String userId, int productId){
+    public void removeProductFromCart(String userId, int productId) {
         Product product = getProductById(productId);
         ShoppingCart shoppingCart;
         shoppingCart = shoppingCartDao.find(userId);
         shoppingCart.removeLineItem(productId);
         shoppingCartDao.addShoppingCart(userId, shoppingCart);
     }
+
     public void decreaseProduct(String userId, int productId) {
         ShoppingCart shoppingCart;
         shoppingCart = shoppingCartDao.find(userId);
@@ -93,7 +104,8 @@ public class ProductService {
         shoppingCart.decreaseLineItem(productId);
         shoppingCartDao.addShoppingCart(userId, shoppingCart);
     }
-    public void increaseProduct(String userId, int productId){
+
+    public void increaseProduct(String userId, int productId) {
         ShoppingCart shoppingCart;
         shoppingCart = shoppingCartDao.find(userId);
         //TODO create increase method to ShoppingCart to modify subTotal
