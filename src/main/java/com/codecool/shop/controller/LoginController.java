@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
         }else{
             System.out.println(productService.getUserByEmailPass(email,password));
 //            System.out.println(newUser.toString());
-
+            session.setAttribute("userId",loginUser.getId());
             resp.sendRedirect("/");
         }
     }

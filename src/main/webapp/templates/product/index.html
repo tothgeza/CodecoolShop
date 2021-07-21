@@ -70,12 +70,16 @@
 <nav class="navbar navbar-light bg-light sticky-top">
     <div class="container-fluid d-flex justify-content-between">
         <div class="d-flex justify-content-evenly">
-            <div class="px-1">
+            <div th:if="${username == null}" class="px-1">
                 <button type="button" class="btn btn-warning btn-sm">login</button>
             </div>
-            <div class="px-1">
+            <div th:if="${username == null}"class="px-1">
                 <button type="button" class="btn btn-warning btn-sm">register</button>
             </div>
+            <div th:if="${username != null}"class="px-1">
+                <button type="button" class="btn btn-warning btn-sm">log out</button>
+            </div>
+            <div th:if="${username != null}"  th:text="${username}"></div>
         </div>
         <div class="dropstart">
             <span class="badge rounded-pill bg-primary card-length" id="cart-length"></span>
