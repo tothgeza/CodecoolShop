@@ -12,6 +12,7 @@ public class User {
     private ShippingAddress shippingAddress;
     private CreditCard creditCard;
     private Paypal paypal;
+    private ShoppingCart shoppingcart;
 
     public User(String userId, String firstName, String lastName, String email, String phone, BillingAddress billingAddress, ShippingAddress shippingAddress) {
         this.id = userId;
@@ -70,6 +71,18 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public void addProduct(Product product) {
+        if (shoppingcart == null) {
+            shoppingcart = new ShoppingCart(product);
+        } else {
+            shoppingcart.addProduct(product);
+        }
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingcart;
     }
 
     @Override
