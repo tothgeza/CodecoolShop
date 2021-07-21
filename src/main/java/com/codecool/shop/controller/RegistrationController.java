@@ -45,7 +45,7 @@ public class RegistrationController extends HttpServlet {
         System.out.println(productService.getUserById(userId).toString());
 //            System.out.println(newUser.toString());
 
-        resp.sendRedirect("/");
+        resp.sendRedirect("/login");
 
     }
 }
