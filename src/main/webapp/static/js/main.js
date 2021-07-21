@@ -45,9 +45,19 @@ const initCart = {
                 }).then(initCart.fetchData)
             })
         })
-    }
+    },
+
 }
 window.onload = function () {
     initCart.fetchData();
     initCart.postData();
+}
+function registrationButton() {
+    window.location = '/registration';
+}
+function loginButton() {
+    window.location = '/login';
+}
+function logoutButton() {
+    window.location = '/logout';
 }
