@@ -43,29 +43,37 @@
                                aria-label="First name" th:value="${user} ? ${user.getFirstName()} : ''">
                     </div>
                     <div class="col-12">
-                        <input type="text" class="form-control" name="lastName" placeholder="Last name" aria-label="Last name">
+                        <input type="text" class="form-control" name="lastName" placeholder="Last name"
+                               aria-label="Last name" th:value="${user} ? ${user.getLastName()}: ''"}>
                     </div>
                     <div class="col-md-12">
-                        <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Email" aria-label="Email">
+                        <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Email"
+                               aria-label="Email" th:value="${user} ? ${user.getEmail()}: ''">
                     </div>
                     <div class="col-md-12">
-                        <input type="tel" class="form-control"  name="phone" id="inputPhone4" placeholder="Phone number" aria-label="Phonenumber">
+                        <input type="tel" class="form-control"  name="phone" id="inputPhone4" placeholder="Phone number"
+                               aria-label="Phonenumber" th:value="${user} ? ${user.getPhone()}: ''">
                     </div>
                     <h5 class="card-title py-2 text-center">Billing Address</h5>
                     <div class="col-md-12">
-                        <input type="text" class="form-control" name="bilCountry" id="inputCountry" placeholder="Country" aria-label="Country">
+                        <input type="text" class="form-control" name="bilCountry" id="inputCountry" placeholder="Country"
+                               aria-label="Country" th:value="${user && user.getBillingAddress()} ? ${user.getBillingAddress().getCountry()}: ''">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="bilCity" id="inputCity" placeholder="City" aria-label="City">
+                        <input type="text" class="form-control" name="bilCity" id="inputCity" placeholder="City"
+                               aria-label="City" th:value="${user && user.getBillingAddress()} ? ${user.getBillingAddress().getCity()}: ''">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="bilZip" id="inputZip" placeholder="Zip code" aria-label="Zip code">
+                        <input type="text" class="form-control" name="bilZip" id="inputZip" placeholder="Zip code"
+                               aria-label="Zip code" th:value="${user && user.getBillingAddress()} ? ${user.getBillingAddress().getZipcode()}: ''">
                     </div>
                     <div class="col-8">
-                        <input type="text" class="form-control" name="bilStreet" id="inputAddress" placeholder="Address" aria-label="Address">
+                        <input type="text" class="form-control" name="bilStreet" id="inputAddress" placeholder="Address"
+                               aria-label="Address" th:value="${user && user.getBillingAddress()} ? ${user.getBillingAddress().getStreet()}: ''">
                     </div>
                     <div class="col-4">
-                        <input type="number" class="form-control" name="bilHouse" id="inputHouseNumber" placeholder="House number" aria-label="House number">
+                        <input type="number" class="form-control" name="bilHouse" id="inputHouseNumber" placeholder="House number"
+                               aria-label="House number" th:value="${user && user.getBillingAddress()} ? ${user.getBillingAddress().getHouseNumber()}: ''">
                     </div>
                     <h5 class="card-title py-2 text-center">Shipping Address</h5>
                     <div class="col-md-12">

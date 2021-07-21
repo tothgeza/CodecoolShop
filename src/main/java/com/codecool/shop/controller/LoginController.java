@@ -41,8 +41,8 @@ public class LoginController extends HttpServlet {
         if(loginUser==null){
             resp.sendRedirect("/login");
         }else{
-            System.out.println(productService.getUserByEmailPass(email,password));
-//            System.out.println(newUser.toString());
+            //System.out.println(productService.getUserByEmailPass(email,password));
+            //System.out.println(newUser.toString());
             session.setAttribute("userId",loginUser.getId());
             resp.sendRedirect("/");
         }
