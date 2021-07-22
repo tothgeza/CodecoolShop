@@ -95,3 +95,6 @@ const initOrder = {
 window.onload = function () {
     initOrder.fetchData();
 }
+function backToMainButton() {
+    window.location = '/';
+}
