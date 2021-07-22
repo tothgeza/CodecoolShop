@@ -98,3 +98,12 @@ window.onload = function () {
 function backToMainButton() {
     window.location = '/';
 }
+function registrationButton() {
+    window.location = '/registration';
+}
+function loginButton() {
+    window.location = '/login';
+}
+function logoutButton() {
+    window.location = '/logout';
+}

@@ -22,3 +22,12 @@ const initPayment = {
 window.onload = function () {
     initPayment.AddPaymentListener();
 }
+function registrationButton() {
+    window.location = '/registration';
+}
+function loginButton() {
+    window.location = '/login';
+}
+function logoutButton() {
+    window.location = '/logout';
+}
