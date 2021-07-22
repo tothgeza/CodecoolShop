@@ -19,7 +19,8 @@ const initCart = {
                 product.textContent = "Product name: " + item.productName
                 quantity.textContent = "Quantity: x" + item.quantity
                 price.textContent = "Price: " + item.price
-                card.classList.add("card", "w-auto", "p-3")
+                // card.classList.add("card", "w-auto", "p-3")
+                card.classList.add("dropdown-item", "w-auto", "p-3")
                 card.append(product, quantity, price)
                 cart.append(card)
                 counter += item.quantity
