@@ -65,6 +65,7 @@ public class SuccessController  extends HttpServlet {
             order = orders.get(0);
             user = productService.getUserById(userId);
         }
+        context.setVariable("user", user);
 
 
         String userEmail = user.getEmail();
