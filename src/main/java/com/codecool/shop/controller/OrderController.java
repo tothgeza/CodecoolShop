@@ -39,12 +39,17 @@ public class OrderController  extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        String userID = req.getSession().getId();
+        String userID;
+        HttpSession session = req.getSession();
+        if(session.getAttribute("userId") != null) {
+            userID = (String) session.getAttribute("userId");
+        }else{
+             userID = req.getSession().getId();
+        }
         ShoppingCart cart = service.getShoppingCartByUserId(userID);
         String myCart = new Gson().toJson(cart);
         JsonParser jp = new JsonParser();
         JsonElement element = jp.parse(myCart);
-        System.out.println("del");
 
 
         context.setVariable("mycart",myCart);

@@ -59,6 +59,9 @@ function registrationButton() {
 function loginButton() {
     window.location = '/login';
 }
+function adminPanel(){
+    window.location = '/admin';
+}
 function logoutButton() {
     window.location = '/logout';
 }

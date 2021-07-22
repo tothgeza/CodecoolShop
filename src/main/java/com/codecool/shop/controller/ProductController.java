@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.Util;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
@@ -52,8 +53,10 @@ public class ProductController extends HttpServlet {
             String userId = (String) session.getAttribute("userId");
             System.out.println("index " + userId);
             User currentUser = productService.getRegisteredUserById(userId);
+            if(currentUser.getId().equals(Util.adminUUID)){
+                context.setVariable("isAdmin" , true);
+            }
             context.setVariable("username",currentUser.getName());
-            context.setVariable("userEmail",currentUser.getEmail());
         }
 
         if (page != null) {
