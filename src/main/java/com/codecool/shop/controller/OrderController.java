@@ -24,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -41,7 +42,13 @@ public class OrderController  extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        String userID = req.getSession().getId();
+        String userID;
+        HttpSession session = req.getSession();
+        if(session.getAttribute("userId") != null) {
+            userID = (String) session.getAttribute("userId");
+        }else{
+             userID = req.getSession().getId();
+        }
         ShoppingCart cart = service.getShoppingCartByUserId(userID);
         String myCart = new Gson().toJson(cart);
         JsonParser jp = new JsonParser();
