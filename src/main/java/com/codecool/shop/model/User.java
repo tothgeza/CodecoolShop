@@ -125,7 +125,9 @@ public class User {
             orders.add(order);
         }
     }
-
+    public void resetShoppingcart(){
+        shoppingcart = null;
+    }
 
     @Override
     public String toString() {

@@ -37,8 +37,8 @@ public class CheckoutController extends HttpServlet {
         HttpSession session = req.getSession();
         if (session.getAttribute("userId") != null) {
             String userId = (String) session.getAttribute("userId");
-            User user = productService.getUserById(userId);
-
+            User user = productService.getRegisteredUserById(userId);
+            System.out.println("check cart " +productService.getShoppingCartByUserId(userId));
             context.setVariable("user", user);
         }
         engine.process("checkout/checkout.html", context, resp.getWriter());
@@ -65,7 +65,9 @@ public class CheckoutController extends HttpServlet {
         String userId;
         if (session.getAttribute("userId") != null){
             userId = (String) session.getAttribute("userId");
+            System.out.println("checkout user id " + userId);
             User user = productService.getRegisteredUserById(userId);
+            System.out.println("Checkout " + user);
             user.setShippingAddress(newShipping);
             user.setBillingAddress(newBilling);
         } else{

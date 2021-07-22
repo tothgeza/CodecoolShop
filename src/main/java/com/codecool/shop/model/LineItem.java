@@ -54,6 +54,18 @@ public class LineItem {
         linePrice = String.format("%.02f", price) + " " + product.getDefaultCurrency().toString();
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public String getProductPrice() {
+        return productPrice;
+    }
+
     public Currency getCurrency() {
         return currency;
     }

@@ -50,15 +50,17 @@ public class PaymentController extends HttpServlet {
         ShoppingCart shoppingCart;
         if(session.getAttribute("userId") != null){
             userId = (String) session.getAttribute("userId");
-            user = productService.getRegisteredUserById("userId");
+            user = productService.getRegisteredUserById(userId);
             user.setCreditCard(creditCard);
-            shoppingCart = productService.getShoppingCartByUserId(userId);
+            shoppingCart = user.getShoppingCart();
+            System.out.println("Shoppingcart " + shoppingCart);
             order = new Order(user, shoppingCart);
             user.addOrder(order);
+            user.resetShoppingcart();
         } else {
             userId = session.getId();
             user = productService.getUserById(userId);
-            user.setCreditCard(creditCard);
+//            user.setCreditCard(creditCard);
             shoppingCart = productService.getShoppingCartByUserId(userId);
             order = new Order(user, shoppingCart);
             productService.addOrder(order);

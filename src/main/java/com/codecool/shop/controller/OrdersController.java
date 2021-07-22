@@ -30,24 +30,28 @@ import java.util.List;
 import java.util.Map;
 
 // ORDER CHECKOUT/ ORDER SUMMARY
-@WebServlet(urlPatterns = {"/order"})
-public class OrderController  extends HttpServlet{
+@WebServlet(urlPatterns = {"/orders"})
+public class OrdersController  extends HttpServlet{
+
     ProductDao productDataStore = ProductDaoMem.getInstance();
     ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
     ShoppingCartDao shoppingCartDao = ShoppingCartDaoMem.getInstance();
     ProductService service = new ProductService(productDataStore, productCategoryDataStore, shoppingCartDao);
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        String userID = req.getSession().getId();
-        ShoppingCart cart = service.getShoppingCartByUserId(userID);
-        String myCart = new Gson().toJson(cart);
-        JsonParser jp = new JsonParser();
-        JsonElement element = jp.parse(myCart);
-        System.out.println("del");
-
-
-        context.setVariable("mycart",myCart);
-        engine.process("order/order.html", context, resp.getWriter());
+        HttpSession session = req.getSession();
+        String userId;
+        User user;
+        if (session.getAttribute("userId") != null) {
+            userId = (String) session.getAttribute("userId");
+            user = service.getRegisteredUserById(userId);
+        } else {
+            userId = req.getSession().getId();
+            user = service.getUserById(userId);
+        }
+        context.setVariable("user", user);
+        engine.process("orders/orders.html", context, resp.getWriter());
     }
-    }
+}

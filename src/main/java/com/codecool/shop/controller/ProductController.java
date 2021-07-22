@@ -50,6 +50,7 @@ public class ProductController extends HttpServlet {
 
         if(session.getAttribute("userId") != null){
             String userId = (String) session.getAttribute("userId");
+            System.out.println("index " + userId);
             User currentUser = productService.getRegisteredUserById(userId);
             context.setVariable("username",currentUser.getName());
             context.setVariable("userEmail",currentUser.getEmail());
