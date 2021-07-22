@@ -8,7 +8,7 @@ import org.thymeleaf.context.Context;
 import java.nio.charset.StandardCharsets;
 
 public class Util {
-
+    public static String adminUUID = "03ecc2eaba9a4377ab3f015d61a8d825";
     public static String enCodeHU(String text){
         String hunglishString = text;
         byte[] hunglishBytes = hunglishString.getBytes();
