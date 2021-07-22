@@ -87,6 +87,10 @@
                     <button type="button" class="btn btn-primary me-3" onClick="registrationButton()">sign up for free
                     </button>
                 </div>
+                <div th:if="${username != null}" class="px-1">
+                    <button type="button" class="btn btn-primary me-3" onClick="registrationButton()">Edit profile
+                    </button>
+                </div>
                 <div th:if="${username != null && isAdmin}" class="px-1">
                     <button type="button" class="btn btn-link px-3 me-2" onClick="adminPanel()">Admin panel
                     </button>

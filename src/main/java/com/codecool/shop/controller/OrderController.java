@@ -53,7 +53,6 @@ public class OrderController  extends HttpServlet{
         String myCart = new Gson().toJson(cart);
         JsonParser jp = new JsonParser();
         JsonElement element = jp.parse(myCart);
-        System.out.println("del");
 
 
         context.setVariable("mycart",myCart);

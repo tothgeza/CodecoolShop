@@ -52,7 +52,7 @@ public class PaymentController extends HttpServlet {
             userId = (String) session.getAttribute("userId");
             user = productService.getRegisteredUserById(userId);
             user.setCreditCard(creditCard);
-            shoppingCart = productService.getShoppingCartByUserId(userId);
+            shoppingCart = user.getShoppingCart();
             order = new Order(user, shoppingCart);
             user.addOrder(order);
         } else {
@@ -69,7 +69,6 @@ public class PaymentController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         resp.sendRedirect(req.getContextPath() + "/success");
 
     }
