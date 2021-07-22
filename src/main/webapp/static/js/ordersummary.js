@@ -104,6 +104,9 @@ function registrationButton() {
 function loginButton() {
     window.location = '/login';
 }
+function editProfile(){
+    window.location = '/profile';
+}
 function logoutButton() {
     window.location = '/logout';
 }

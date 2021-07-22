@@ -62,6 +62,9 @@ function loginButton() {
 function adminPanel(){
     window.location = '/admin';
 }
+function editProfile(){
+    window.location = '/profile';
+}
 function logoutButton() {
     window.location = '/logout';
 }
