@@ -61,7 +61,8 @@
                         <form th:action="@{/order}" th:method="GET">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <br/>
-                                <input type="submit" value="Checkout & Order summary" class="btn btn-success btn-rounded btn-own"/>
+                                <input type="submit" value="Checkout & Order summary"
+                                       class="btn btn-success btn-rounded btn-own"/>
                             </div>
                         </form>
                     </div>
@@ -75,8 +76,66 @@
                 <h4>Order success!</h4>
             </div>
             <div class="card-body p-3 mb-5 bg-body rounded">
-
-
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item border-0">
+                        <div class="card-header">User</div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Name</td>
+                                    <td th:text="${user.getName()}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td th:text="${user.getPhone()}"></td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td th:text="${user.getBillingAddress().getCity()}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Zip code</td>
+                                    <td th:text="${user.getBillingAddress().getZipcode()}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Street</td>
+                                    <td th:text="${user.getBillingAddress().getStreet()}"></td>
+                                </tr>
+                                <tr>
+                                    <td>House Nr.</td>
+                                    <td th:text="${user.getBillingAddress().getHouseNumber()}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="card-header">Order</div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Quantity </th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="lineItem, iterStat: ${order.getShoppingCart().getLineItems()}">
+                                    <td th:text="${iterStat.index} + '. '"></td>
+                                    <td th:text="${lineItem.getProductName()} + ' '"></td>
+                                    <td th:text="${lineItem.getQuantity()}"></td>
+                                    <td th:text="${lineItem.getProductPrice()}"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>SubTotal</td>
+                                    <td th:text="${order.getShoppingCart().getSubTotal()} + ' USD'"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
