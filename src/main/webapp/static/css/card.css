@@ -112,18 +112,18 @@ h2 {
     padding: 5px 50px 5px 50px
 }
 
-.box {
+.box .btn-own{
     font-size: 1.5rem
 }
 
 @media (max-width: 1025px) {
-    .btn {
+    .btn-own{
         padding: 5px 40px 5px 40px
     }
 }
 
 @media (max-width: 250px) {
-    .btn {
+    .btn-own{
         padding: 5px 30px 5px 30px
     }
 }
