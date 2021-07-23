@@ -23,21 +23,11 @@
                         <a class="nav-link" th:href="@{/}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Projects</a>
+                        <a class="nav-link" href="">Orders</a>
                     </li>
                 </ul>
             </div>
             <div class="d-flex align-items-center">
-                <div th:if="${username == null}" class="px-1">
-                    <button type="button" class="btn btn-link px-3 me-2" onClick="loginButton()">login</button>
-                </div>
-                <div th:if="${username == null}" class="px-1">
-                    <button type="button" class="btn btn-primary me-3" onClick="registrationButton()">sign up for free
-                    </button>
-                </div>
                 <div th:if="${username != null}" class="px-1">
                     <button type="button" class="btn btn-link px-3 me-2" onClick="logoutButton()">log out
                     </button>
