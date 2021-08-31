@@ -72,7 +72,8 @@ public class SuccessController  extends HttpServlet {
 
         String userEmail = user.getEmail();
        // String[] to = { userEmail }; // list of recipient email addresses
-        String[] to = { userEmail,"sallcsa.csaba9@gmail.com",
+        String[] to = { userEmail
+//                "sallcsa.csaba9@gmail.com",
 //                "anett.fejes@codecool.com",
 //                "imre.lindi@codecool.com",
 //                "turi.krisztina1999@gmail.com",
@@ -83,12 +84,11 @@ public class SuccessController  extends HttpServlet {
 //                "pelyheroland22@gmail.com",
 //                "vedres.david.adam@gmail.com",
 //                "kriszdemarco@gmail.com",
-                "toth.geza.0425@gmail.com",
+//                "toth.geza.0425@gmail.com",
 //                "spiczmuller.richard@gmail.com",
 //                "halaszpeter9814@gmail.com",
 //                "rauszka94@gmail.com",
 //                "jozsefbabcsan1@gmail.com",
-                "sallcsa.csaba8@gmail.com",
 //                "kalydybarnabas99@gmail.com",
 //                "papaimate166@gmail.com",
 //                "kbalazs93@gmail.com",
@@ -96,9 +96,10 @@ public class SuccessController  extends HttpServlet {
 //                "d.aldan12.ad@gmail.com",
 //                "fazekasdav@gmail.com",
 //                "attilaaa1313@gmail.com",
-                "ptcadam@gmail.com"};
+//                "ptcadam@gmail.com"};
 //                "beatrix.szabo.sc@gmail.com",
-//                "siposm17@gmail.com" };
+//                "siposm17@gmail.com"
+                };
         String subject = "Success Order!";
         ShoppingCart shoppingCart = order.getShoppingCart();
 

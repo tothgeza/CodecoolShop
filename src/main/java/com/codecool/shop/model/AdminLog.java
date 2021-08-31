@@ -1,15 +1,13 @@
 package com.codecool.shop.model;
 
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 
 public class AdminLog {
-    private static String userdID;
+    private static String userID;
     private static Object object;
     private static String action;
     private static SimpleDateFormat formatter;
@@ -19,15 +17,15 @@ public class AdminLog {
     private static String result = "";
 
 
-    private static String getJSON(String userdID, String action) {
+    private static String getJSON(String userID, String action) {
         formatter = new SimpleDateFormat("[dd-MM-yyyy HH:mm:ss]");
         currentTime = formatter.format(new Date());
-        setUserdID(userdID);
+        setUserID(userID);
         setAction(action);
         String result = "";
         Gson gson = new Gson();
         result += gson.toJson(currentTime);
-        result += gson.toJson(userdID);
+        result += gson.toJson(userID);
         result += gson.toJson(action);
         System.out.println(result);
         return result;
@@ -38,7 +36,7 @@ public class AdminLog {
         formatter2 = new SimpleDateFormat("[dd-MM-yyyy]");
         currentTime = formatter.format(new Date());
         currentTime2 = formatter2.format(new Date());
-        setUserdID(userdID);
+        setUserID(userdID);
         setAction(action);
         String filepath = System.getProperty("user.dir") + String.format("/AdminLog/%s-%s.json", userdID, currentTime2);
 
@@ -74,7 +72,7 @@ public class AdminLog {
         formatter2 = new SimpleDateFormat("[dd-MM-yyyy]");
         currentTime = formatter.format(new Date());
         currentTime2 = formatter2.format(new Date());
-        setUserdID(userdID);
+        setUserID(userdID);
         setAction(action);
         String filepath = System.getProperty("user.dir") + String.format("/AdminLog/%s-%s.json", userdID, currentTime2);
 
@@ -95,7 +93,7 @@ public class AdminLog {
         formatter2 = new SimpleDateFormat("[dd-MM-yyyy]");
         currentTime = formatter.format(new Date());
         currentTime2 = formatter2.format(new Date());
-        setUserdID(userdID);
+        setUserID(userdID);
         setAction(action);
         String filepath = System.getProperty("user.dir") + String.format("/AdminLog/%s-%s.json", userdID, currentTime2);
 
@@ -126,8 +124,8 @@ public class AdminLog {
         getJSON(userdID, cC, action);
     }
 
-    public static void setUserdID(String userdID) {
-        AdminLog.userdID = userdID;
+    public static void setUserID(String userID) {
+        AdminLog.userID = userID;
     }
 
     public static void setAction(String action) {
