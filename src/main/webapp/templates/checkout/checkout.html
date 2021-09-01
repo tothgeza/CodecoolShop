@@ -22,40 +22,10 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Orders</a>
-                    </li>
                 </ul>
             </div>
             <div class="d-flex align-items-center">
-                <div th:if="${username != null}" class="px-1">
-                    <button type="button" class="btn btn-link px-3 me-2" onClick="logoutButton()">log out
-                    </button>
-                </div>
                 <div th:if="${username != null}" th:text="${username}"></div>
-                <a
-                        class="text-reset me-3 dropdown-toggle hidden-arrow"
-                        href="#"
-                        role="button"
-                        id="navbarDropdownMenuLink"
-                        data-mdb-toggle="dropdown"
-                        aria-expanded="false"
-                >
-                    <i class="fas fa-shopping-cart" data-mdb-toggle="dropdown"
-                       aria-expanded="false"></i>
-                    <span class="badge rounded-pill badge-notification bg-warning" id="cart-length"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end text-center shopping-items w-auto p-3">
-                    <div id="shopping-list"></div>
-                    <div>
-                        <form th:action="@{/order}" th:method="GET">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <br/>
-                                <input type="submit" value="Checkout & Order summary" class="btn btn-success btn-rounded btn-own"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </nav>
@@ -144,26 +114,6 @@
                                aria-label="House number"
                                th:value="${user && user.getShippingAddress()} ? ${user.getShippingAddress().getHouseNumber()}:''">
                     </div>
-<!--                    <div class="col-12 text-center pt-5">-->
-<!--                        &lt;!&ndash;SHIPPINGMETHOD&ndash;&gt;-->
-<!--                        &lt;!&ndash;YOUCANCHOSESHIPPINGMETHODHERE&ndash;&gt;-->
-<!--                        <h5 class="card-title py-2 text-center">Shipping Method</h5>-->
-<!--                        <div class="form-check">-->
-<!--                            <input id="post" name="shippingmethod" type="radio" class="form-check-input"-->
-<!--                                   required>-->
-<!--                            <label class="form-check-label" for="post">Hungarian Post</label>-->
-<!--                        </div>-->
-<!--                        <div class="form-check">-->
-<!--                            <input id="fedex" name="shippingmethod" type="radio" class="form-check-input"-->
-<!--                                   required>-->
-<!--                            <label class="form-check-label" for="post">Fedex</label>-->
-<!--                        </div>-->
-<!--                        <div class="form-check">-->
-<!--                            <input id="gls" name="shippingmethod" type="radio" class="form-check-input"-->
-<!--                                   required>-->
-<!--                            <label class="form-check-label" for="gls">GLS</label>-->
-<!--                        </div>-->
-<!--                    </div>-->
                     <div class="text-center mt-5">
                         <button type="submit" class="btn btn-success btn-rounded btn-own mb-2">Go Payment</button>
                     </div>

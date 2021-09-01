@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layer.html :: head"></head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -29,17 +29,6 @@
                 </ul>
             </div>
             <div class="d-flex align-items-center">
-<!--                <div th:if="${username == null}" class="px-1">-->
-<!--                    <button type="button" class="btn btn-link px-3 me-2" onClick="loginButton()">login</button>-->
-<!--                </div>-->
-<!--                <div th:if="${username == null}" class="px-1">-->
-<!--                    <button type="button" class="btn btn-primary me-3" onClick="registrationButton()">sign up for free-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div th:if="${username != null}" class="px-1">-->
-<!--                    <button type="button" class="btn btn-link px-3 me-2" onClick="logoutButton()">log out-->
-<!--                    </button>-->
-<!--                </div>-->
                 <div th:if="${username != null}" th:text="${username}"></div>
                 <a
                         class="text-reset me-3 dropdown-toggle hidden-arrow"
@@ -119,7 +108,7 @@
                             </thead>
                             <tbody>
                                 <tr th:each="lineItem, iterStat: ${order.getShoppingCart().getLineItems()}">
-                                    <td th:text="${iterStat.index} + '. '"></td>
+                                    <td th:text="${iterStat.index + 1} + '. '"></td>
                                     <td th:text="${lineItem.getProductName()} + ' '"></td>
                                     <td th:text="${lineItem.getQuantity()}"></td>
                                     <td th:text="${lineItem.getProductPrice()}"></td>
