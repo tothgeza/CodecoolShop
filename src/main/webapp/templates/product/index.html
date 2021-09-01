@@ -6,41 +6,6 @@
 
 <body class="d-flex flex-column min-vh-100">
     <div th:replace="layer.html :: header"></div>
-<!--    <nav class="navbar navbar-light bg-light sticky-top shadow-sm">-->
-<!--        <div class="container-fluid d-flex justify-content-between">-->
-<!--            <div class="d-flex justify-content-evenly">-->
-<!--                <div th:if="${username == null}" class="px-1">-->
-<!--                    <button type="button" class="btn btn-warning btn-sm btn-own" onClick="loginButton()">login</button>-->
-<!--                </div>-->
-<!--                <div th:if="${username == null}" class="px-1">-->
-<!--                    <button type="button" class="btn btn-warning btn-sm btn-own" onClick="registrationButton()">register-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div th:if="${username != null}" class="px-1">-->
-<!--                    <button type="button" class="btn btn-warning btn-sm btn-own" onClick="logoutButton()">log out-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div th:if="${username != null}" th:text="${username}"></div>-->
-<!--            </div>-->
-<!--            <div class="dropdown">-->
-<!--&lt;!&ndash;                <span class="badge rounded-pill bg-primary card-length" id="cart-length"></span>&ndash;&gt;-->
-<!--                <button type="button" data-mdb-toggle="dropdown"-->
-<!--                        aria-expanded="false" class="btn btn-warning"><i class="fas fa-shopping-cart"></i>-->
-<!--                </button>-->
-<!--                <div class="dropdown-menu text-center shopping-items w-auto p-3">-->
-<!--                    <div id="shopping-list"></div>-->
-<!--                    <div>-->
-<!--                        <form th:action="@{/order}" th:method="GET">-->
-<!--                            <div class="col-xs-12 col-sm-6 col-md-6">-->
-<!--                                <br/>-->
-<!--                                <input type="submit" value="Checkout & Order summary" class="btn btn-success btn-rounded btn-own"/>-->
-<!--                            </div>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </nav>-->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Container wrapper -->
@@ -67,12 +32,12 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/}">Home</a>
                     </li>
-<!--                    <li th:if="${username == null}" class="nav-item">-->
+                    <!--                    <li th:if="${username == null}" class="nav-item">-->
                     <li th:if="${username != null}" class="nav-item">
                         <a class="nav-link" th:href="@{/orders}">Orders</a>
                     </li>
                     <li th:if="${username != null}" class="nav-item">
-                        <a class="nav-link" href="/profile">Edit profile
+                        <a class="nav-link" href="/profile">Edit address
                         </a>
                     </li>
                 </ul>
@@ -81,7 +46,7 @@
             <!-- Collapsible wrapper -->
 
             <!-- Right elements -->
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center dropdown">
                 <div th:if="${username == null}" class="px-1">
                     <button type="button" class="btn btn-link px-3 me-2" onClick="loginButton()">login</button>
                 </div>
@@ -97,57 +62,45 @@
                     <button type="button" class="btn btn-link px-3 me-2" onClick="logoutButton()">log out
                     </button>
                 </div>
-                <div th:if="${username != null}" th:text="${username}"></div>
+                <div th:if="${username != null}" th:text="${username}" style="position: relative;right: 10px;"></div>
                 <!-- Icon -->
-                <a
-                        class="text-reset me-3 dropdown-toggle hidden-arrow"
-                        href="#"
-                        role="button"
-                        id="navbarDropdownMenuLink"
-                        data-mdb-toggle="dropdown"
-                        aria-expanded="false"
-                >
-                    <i class="fas fa-shopping-cart" data-mdb-toggle="dropdown"
-                       aria-expanded="false"></i>
-                    <span class="badge rounded-pill badge-notification bg-warning" id="cart-length"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end text-center shopping-items w-auto p-3">
-                    <div id="shopping-list"></div>
-                    <div>
-                        <form th:action="@{/order}" th:method="GET">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <br/>
-                                <input type="submit" value="Checkout & Order summary" class="btn btn-success btn-rounded btn-own"/>
-                            </div>
-                        </form>
+<!--                <div class="dropdown">-->
+                    <a
+                            class="text-reset me-3 dropdown-toggle hidden-arrow"
+                            href="#"
+                            role="button"
+                            id="navbarDropdownMenuLink"
+                            data-mdb-toggle="dropdown"
+                            aria-expanded="false"
+                    >
+                        <i class="fas fa-shopping-cart" data-mdb-toggle="dropdown"
+                           aria-expanded="false"></i>
+                        <span class="badge rounded-pill badge-notification bg-warning" id="cart-length"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end text-center shopping-items w-auto p-3">
+                        <div id="shopping-list"></div>
+                        <div>
+                            <form th:action="@{/order}" th:method="GET">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <br/>
+                                    <input type="submit" value="Checkout & Order summary"
+                                           class="btn btn-success btn-rounded btn-own"/>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-<!--                <ul-->
-<!--                        class="dropdown-menu dropdown-menu-end"-->
-<!--                        aria-labelledby="navbarDropdownMenuLink"-->
-<!--                >-->
-<!--                    <li>-->
-<!--                        <a class="dropdown-item" href="#">Some news</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="dropdown-item" href="#">Another news</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
+
             </div>
             <!-- Right elements -->
         </div>
         <!-- Container wrapper -->
     </nav>
     <!-- Navbar -->
-    <!--    <div class="card shadow p-3 mb-5 bg-body rounded shopcard">-->
     <div class="container shopcard">
         <div class="py-3">
             <div class="text-center">
                 <strong th:if="${category}" th:text="${category.name}">Category Title</strong>
-                <strong th:if="${supplierList}" th:text="${currentSupplier}">Category Title</strong>
+                <strong th:if="${supplierList}" th:text="${#strings.capitalize(currentSupplier)}">Category Title</strong>
             </div>
         </div>
         <div class="row d-flex justify-content-center">
