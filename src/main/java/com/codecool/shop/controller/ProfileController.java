@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.config.Util;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
@@ -44,15 +45,15 @@ public class ProfileController extends HttpServlet {
         engine.process("edit/edit.html", context, resp.getWriter());
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String bilCountry = req.getParameter("bilCountry");
-        String bilCity = req.getParameter("bilCity");
+        String bilCountry = Util.enCodeHU(req.getParameter("bilCountry"));
+        String bilCity = Util.enCodeHU(req.getParameter("bilCity"));
         int bilZip = Integer.parseInt(req.getParameter("bilZip"));
-        String bilStreet = req.getParameter("bilStreet");
+        String bilStreet = Util.enCodeHU(req.getParameter("bilStreet"));
         int bilHouse = Integer.parseInt(req.getParameter("bilHouse"));
-        String shipCountry = req.getParameter("shipCountry");
-        String shipCity = req.getParameter("shipCity");
+        String shipCountry = Util.enCodeHU(req.getParameter("shipCountry"));
+        String shipCity = Util.enCodeHU(req.getParameter("shipCity"));
         int shipZip = Integer.parseInt(req.getParameter("shipZip"));
-        String shipStreet = req.getParameter("shipStreet");
+        String shipStreet = Util.enCodeHU(req.getParameter("shipStreet"));
         int shipHouse = Integer.parseInt(req.getParameter("shipHouse"));
         BillingAddress newBilling = new BillingAddress(bilCountry, bilCity, bilZip, bilStreet, bilHouse);
         ShippingAddress newShipping = new ShippingAddress(shipCountry, shipCity, shipZip, shipStreet, shipHouse);
