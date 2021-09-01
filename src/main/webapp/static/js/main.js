@@ -18,7 +18,7 @@ const initCart = {
                 const price = document.createElement("div")
                 product.textContent = "Product name: " + item.productName
                 quantity.textContent = "Quantity: x" + item.quantity
-                price.textContent = "Price: " + item.price
+                price.textContent = "Price: " + item.price + " USD"
                 // card.classList.add("card", "w-auto", "p-3")
                 card.classList.add("dropdown-item", "w-auto", "p-3")
                 card.append(product, quantity, price)
@@ -28,7 +28,7 @@ const initCart = {
             }
             cartLength.textContent = counter
             const pr = document.createElement("div")
-            pr.textContent = "Total price: " + totalPrice.toFixed(2)
+            pr.textContent = "Total price: " + totalPrice.toFixed(2) + " USD"
             cart.append(pr)
         }
     },

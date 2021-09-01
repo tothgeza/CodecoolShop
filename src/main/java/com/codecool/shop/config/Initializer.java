@@ -29,7 +29,7 @@ public class Initializer implements ServletContextListener {
         ProductService service = new ProductService();
 
         //initialize admin user
-        User adminUser = new User(Util.adminUUID, "admin","superUser","admin@codecool.shop","36204365526","admin");
+        User adminUser = new User(Util.adminUUID, "Admin"," ","admin@codecool.shop","36204365526","admin");
         service.addRegisteredUser(adminUser);
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
