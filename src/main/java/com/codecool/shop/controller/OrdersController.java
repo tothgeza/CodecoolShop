@@ -43,15 +43,19 @@ public class OrdersController  extends HttpServlet{
         WebContext context = new WebContext(req, resp, req.getServletContext());
         HttpSession session = req.getSession();
         String userId;
+        String username;
         User user;
         if (session.getAttribute("userId") != null) {
             userId = (String) session.getAttribute("userId");
             user = service.getRegisteredUserById(userId);
+            username = user.getName();
         } else {
             userId = req.getSession().getId();
             user = service.getUserById(userId);
+            username = null;
         }
         context.setVariable("user", user);
+        context.setVariable("username",username);
         engine.process("orders/orders.html", context, resp.getWriter());
     }
 }

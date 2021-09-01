@@ -33,6 +33,14 @@ public class ProfileController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        //pass on user data
+        HttpSession session = req.getSession();
+        String userId = (String) session.getAttribute("userId");
+        User user = productService.getRegisteredUserById(userId);
+        context.setVariable("user", user);
+        context.setVariable("username",user.getName());
+
         engine.process("edit/edit.html", context, resp.getWriter());
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

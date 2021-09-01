@@ -38,7 +38,9 @@ public class CheckoutController extends HttpServlet {
         if (session.getAttribute("userId") != null) {
             String userId = (String) session.getAttribute("userId");
             User user = productService.getRegisteredUserById(userId);
+            String username = user.getName();
             context.setVariable("user", user);
+            context.setVariable("username", username);
         }
         engine.process("checkout/checkout.html", context, resp.getWriter());
     }
