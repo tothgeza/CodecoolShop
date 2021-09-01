@@ -22,6 +22,10 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/}">Home</a>
                     </li>
+                    <li th:if="${username != null}" class="nav-item">
+                        <a class="nav-link" href="/profile">Edit address
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="d-flex align-items-center">
@@ -36,14 +40,14 @@
                     <button type="button" class="btn btn-link px-3 me-2" onClick="logoutButton()">log out
                     </button>
                 </div>
-                <div th:if="${username != null}" th:text="${username}'s order(s)"></div>
+                <div th:if="${username != null}" th:text="${username + 's order(s)'}"></div>
             </div>
         </div>
     </nav>
     <div class="container px-3 py-3 ">
-        <div class="center-text">
-            <h4 th:if="${user != null}" th:text="${user.getName()}" class="center-text"></h4>
-        </div>
+<!--        <div class="center-text">-->
+<!--            <h4 th:if="${user != null}" th:text="${user.getName()}" class="center-text"></h4>-->
+<!--        </div>-->
         <div class="row" th:each="order,iterStat : ${user.getOrders()}">
             <div class="card card-custom shadow my-5">
                 <div class="card-header text-center py-4 border-0"
@@ -61,7 +65,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="lineItem,iterStato : ${order.getShoppingCart().getLineItems()}">
-                                <td scope="row" th:text="${iterStato.index}"></td>
+                                <td scope="row" th:text="${iterStato.index + 1}"></td>
                                 <td th:text="${lineItem.getProductName()}"></td>
                                 <td th:text="${lineItem.getQuantity()}"></td>
                                 <td th:text="${lineItem.getLinePrice()}"></td>
